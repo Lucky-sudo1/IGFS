@@ -1,8 +1,6 @@
-% ¼ÙÉèÒÑ¾­´æÔÚÃûÎªMµÄ366ĞĞ6ÁĞµÄµ¥ÔªÊı×é£¬Ã¿¸öµ¥Ôª¸ñÖ±½Ó´æ´¢3¸öÊıÖµµÄÊı×é  
-% ÕâÀï²»½øĞĞMµÄ³õÊ¼»¯£¬Êµ¼ÊÊ¹ÓÃÊ±ÇëÈ·±£MÒÑÕıÈ·¸³Öµ  
-% ½«Áù¸ö¾ØÕóµÄÃ¿Ò»ĞĞºÏ²¢µ½ M ÖĞ  
+ % å°†å…­ä¸ªçŸ©é˜µçš„æ¯ä¸€è¡Œåˆå¹¶åˆ° M ä¸­  
 for i = 1:366  
-    % ½«Ã¿¸ö¾ØÕóµÄµÚ i ĞĞ¸³Öµ¸ø M  
+    % å°†æ¯ä¸ªçŸ©é˜µçš„ç¬¬ i è¡Œèµ‹å€¼ç»™ M  
     M{i, 1} = A(i, :);  
     M{i, 2} = B(i, :);  
     M{i, 3} = C(i, :);  
@@ -10,50 +8,50 @@ for i = 1:366
     M{i, 5} = E(i, :);  
     M{i, 6} = F(i, :);  
 end
-% »ñÈ¡MµÄĞĞÊıºÍÁĞÊı  
+% è·å–Mçš„è¡Œæ•°å’Œåˆ—æ•°  
 numRows = size(M, 1);  
 numCols = size(M, 2);  
 
-% ³õÊ¼»¯½á¹ûµ¥ÔªÊı×éMT  
+
 MT = cell(numRows, numCols);  
 
-% ±éÀúMµÄÃ¿Ò»¸öÔªËØ  
+  
 for i = 1:numRows  
     for j = 1:numCols  
-        % »ñÈ¡µ±Ç°ÊôĞÔÏÂµÄÊıÖµÊı×é  
-        currentArray = M{i, j}; % Ö±½Ó·ÃÎÊÊıÖµÊı×é  
         
-        % È·±£ currentArray ÊÇ 1x3 ÊıÖµÊı×é  
+        currentArray = M{i, j};
+        
+        
         if isnumeric(currentArray) && isequal(size(currentArray), [1, 3])  
-            % ¶ÔÊıÖµÊı×é½øĞĞ´Ó´óµ½Ğ¡ÅÅĞò  
+           
             sortedArray = sort(currentArray, 'descend');  
             
-            % ½«ÅÅĞòºóµÄÊıÖµÊı×é×ª»»»Øµ¥ÔªÊı×éĞÎÊ½  
+            
             sortedCell = num2cell(sortedArray);  
             
-            % ½«ÅÅĞòºóµÄµ¥ÔªÊı×é±£´æµ½MTÖĞ  
+            % å°†æ’åºåçš„å•å…ƒæ•°ç»„ä¿å­˜åˆ°MTä¸­  
             MT{i, j} = sortedCell;  
         else  
-            error('M{%d, %d} µÄÄÚÈİ²»·ûºÏÔ¤ÆÚ£¬ÆÚÍûÎªÒ»¸ö³¤¶ÈÎª3µÄÊıÖµÊı×é£¬¶øÊµ¼ÊÄÚÈİÎª£º%s', i, j, mat2str(currentArray));  
+            error('M{%d, %d} çš„å†…å®¹ä¸ç¬¦åˆé¢„æœŸï¼ŒæœŸæœ›ä¸ºä¸€ä¸ªé•¿åº¦ä¸º3çš„æ•°å€¼æ•°ç»„ï¼Œè€Œå®é™…å†…å®¹ä¸ºï¼š%s', i, j, mat2str(currentArray));  
         end  
     end  
 end
 
-% »ñÈ¡MTµÄĞĞÊıºÍÁĞÊı
+
 numRows = size(MT, 1);
 numCols = size(MT, 2);
 
-% ³õÊ¼»¯ÕıÀíÏëµãºÍ¸ºÀíÏëµãµÄµ¥ÔªÊı×é
+% åˆå§‹åŒ–æ­£ç†æƒ³ç‚¹å’Œè´Ÿç†æƒ³ç‚¹çš„å•å…ƒæ•°ç»„
 h_plus = cell(1, numCols);
 h_minus = cell(1, numCols);
 
-% ±éÀúMTµÄÃ¿Ò»ÁĞ
+% éå†MTçš„æ¯ä¸€åˆ—
 for j = 1:numCols
     first_elements = zeros(numRows, 1);
     second_elements = zeros(numRows, 1);
     third_elements = zeros(numRows, 1);
     
-    % ÌáÈ¡Ã¿Ò»ÁĞÖĞÃ¿¸öÓÌÔ¥Ä£ºı¼¯µÄÈı¸öÔªËØ
+    % æå–æ¯ä¸€åˆ—ä¸­æ¯ä¸ªçŠ¹è±«æ¨¡ç³Šé›†çš„ä¸‰ä¸ªå…ƒç´ 
     for i = 1:numRows
         currentCell = MT{i, j};
         first_elements(i) = currentCell{1};
@@ -61,41 +59,41 @@ for j = 1:numCols
         third_elements(i) = currentCell{3};
     end
     
-    % ¼ÆËãÕıÀíÏëµã
+    % è®¡ç®—æ­£ç†æƒ³ç‚¹
     max_first = max(first_elements);
     max_second = max(second_elements);
     max_third = max(third_elements);
     h_plus{j} = num2cell([max_first, max_second, max_third]);
     
-    % ¼ÆËã¸ºÀíÏëµã
+    % è®¡ç®—è´Ÿç†æƒ³ç‚¹
     min_first = min(first_elements);
     min_second = min(second_elements);
     min_third = min(third_elements);
     h_minus{j} = num2cell([min_first, min_second, min_third]);
 end
 
-% ³õÊ¼»¯¾àÀë¾ØÕó
+
 distance_to_zheng = zeros(numRows, numCols);
 distance_to_fu = zeros(numRows, numCols);
 
-% ¼ÆËãÃ¿¸öÔªËØµ½ÕıÀíÏëµãºÍ¸ºÀíÏëµãµÄ¾àÀë
+% è®¡ç®—æ¯ä¸ªå…ƒç´ åˆ°æ­£ç†æƒ³ç‚¹å’Œè´Ÿç†æƒ³ç‚¹çš„è·ç¦»
 for att_idx = 1:numCols
     for i = 1:numRows
-        % »ñÈ¡µ±Ç°ÔªËØ
-        x = cell2mat(MT{i, att_idx}); % ĞŞ¸ÄÎª»¨À¨ºÅ·ÃÎÊÄÚ²¿Ôª°ûÊı×é
+        % è·å–å½“å‰å…ƒç´ 
+        x = cell2mat(MT{i, att_idx}); 
         
-        % »ñÈ¡ÕıÀíÏëµã
+        % è·å–æ­£ç†æƒ³ç‚¹
         plus_array = cell2mat(h_plus{att_idx});
-        % ¹éÒ»»¯£¨±ÜÃâ³ıÁã£©
+        % å½’ä¸€åŒ–ï¼ˆé¿å…é™¤é›¶ï¼‰
         M_norm = x / (sum(x) + eps);
         plus_norm = plus_array / (sum(plus_array) + eps);
         
-        % ¶ÔÆë³¤¶È
+        % å¯¹é½é•¿åº¦
         max_len = max(length(M_norm), length(plus_norm));
         M_padded = [M_norm, zeros(1, max_len - length(M_norm))];
         plus_padded = [plus_norm, zeros(1, max_len - length(plus_norm))];
         
-        % ¼ÆËã JS É¢¶È
+        % è®¡ç®— JS æ•£åº¦
         JS_divergence_zheng = 0;
         for k = 1:max_len
             m_k = M_padded(k);
@@ -112,20 +110,20 @@ for att_idx = 1:numCols
             JS_divergence_zheng= JS_divergence_zheng + term;
         end
         
-        % ¼ÆËã¾àÀë²¢´æ´¢
+       
         distance_zheng = sqrt(0.5 * max(JS_divergence_zheng, 0));
         distance_to_zheng(i, att_idx) = real(distance_zheng);
         
-        % »ñÈ¡¸ºÀíÏëµã
+        % è·å–è´Ÿç†æƒ³ç‚¹
         minus_array = cell2mat(h_minus{att_idx});
-        % ¹éÒ»»¯£¨±ÜÃâ³ıÁã£©
+        % å½’ä¸€åŒ–
         minus_norm = minus_array / (sum(minus_array) + eps);
         
-        % ¶ÔÆë³¤¶È
+      
         max_len = max(length(M_norm), length(minus_norm));
         minus_padded = [minus_norm, zeros(1, max_len - length(minus_norm))];
         
-        % ¼ÆËã JS É¢¶È
+        % è®¡ç®— JS æ•£åº¦
         JS_divergence_fu = 0;
         for k = 1:max_len
             m_k = M_padded(k);
@@ -142,7 +140,7 @@ for att_idx = 1:numCols
             JS_divergence_fu = JS_divergence_fu + term;
         end
         
-        % ¼ÆËã¾àÀë²¢´æ´¢
+        % è®¡ç®—è·ç¦»å¹¶å­˜å‚¨
         distance_fu = sqrt(0.5 * max(JS_divergence_fu, 0));
         distance_to_fu(i, att_idx) = real(distance_fu);
     end
@@ -156,76 +154,76 @@ v=2.25;
 rho = 0.88; % Parameter for gain calculation   
 %  omega=[0.05,0.3,0.2,0.05,0.1,0.3]%dfenleiquanzhong
  omega=[0.1666,0.1684, 0.1661,0.1675,0.1661,0.1653]
-% ¼ÆËãËğÊ§ I^- ºÍÊÕÒæ I^+  
-% ¼ÆËãËğÊ§ I^- ºÍÊÕÒæ I^+  
+% è®¡ç®—æŸå¤± I^- å’Œæ”¶ç›Š I^+  
+% è®¡ç®—æŸå¤± I^- å’Œæ”¶ç›Š I^+  
 I_fu = -sum(v.* distance_to_zheng.^ xi .* repmat( omega, numRows, 1), 2);   
 I_zheng = sum(distance_to_fu .^ rho .* repmat( omega, numRows, 1), 2);  
 
-%¼ÆËã×ÜÖ¸±ê I(z_t)  
+%è®¡ç®—æ€»æŒ‡æ ‡ I(z_t)  
 Si =0.5.*(I_fu+I_zheng);
 
 yi=Si;
 
- % ÕÒ³öchiÀïÃæµÄ×î´óºÍ×îĞ¡Öµ
+ % æ‰¾å‡ºchié‡Œé¢çš„æœ€å¤§å’Œæœ€å°å€¼
     yi_max = max(Si);
     yi_min = min(Si);
 
 
-% ÉèÖÃãĞÖµ s
-%    s = 0.43; %diyipian·ÖÀà
+% è®¾ç½®é˜ˆå€¼ s
+%    s = 0.43; %diyipianåˆ†ç±»
   s=0.3%SCC
 
 
-    num_alternatives = length(yi); % ¼ÙÉè±¸Ñ¡·½°¸ÊıÁ¿µÈÓÚchiµÄ³¤¶È
+    num_alternatives = length(yi); % å‡è®¾å¤‡é€‰æ–¹æ¡ˆæ•°é‡ç­‰äºchiçš„é•¿åº¦
 
-    % ³õÊ¼»¯Ïà¶ÔĞ§ÓÃÖµ¾ØÕó£¬num_alternativesĞĞ6ÁĞ£¬·Ö±ğ¶ÔÓ¦6¸öÏà¶ÔĞ§ÓÃº¯Êı
+    % åˆå§‹åŒ–ç›¸å¯¹æ•ˆç”¨å€¼çŸ©é˜µï¼Œnum_alternativesè¡Œ6åˆ—ï¼Œåˆ†åˆ«å¯¹åº”6ä¸ªç›¸å¯¹æ•ˆç”¨å‡½æ•°
     relative_utility_values = zeros(num_alternatives, 6);
 
     for i = 1:num_alternatives
-        % ¶ÔÓÚhPPº¯Êı
+        % å¯¹äºhPPå‡½æ•°
         relative_utility_values(i, 1) = 0;
-        % ¶ÔÓÚhPNº¯Êı
+        % å¯¹äºhPNå‡½æ•°
         relative_utility_values(i, 2) = yi_max - yi(i);
-        % ¶ÔÓÚhBPº¯Êı
+        % å¯¹äºhBPå‡½æ•°
         relative_utility_values(i, 3) = s * (yi(i) - yi_min);
-        % ¶ÔÓÚhBNº¯Êı
+        % å¯¹äºhBNå‡½æ•°
         relative_utility_values(i, 4) = s * (yi_max - yi(i));
-        % ¶ÔÓÚhNPº¯Êı
+        % å¯¹äºhNPå‡½æ•°
         relative_utility_values(i, 5) = yi(i) - yi_min;
-        % ¶ÔÓÚhNNº¯Êı
+        % å¯¹äºhNNå‡½æ•°
         relative_utility_values(i, 6) = 0;
     end
 
-    disp('Ã¿¸ö±¸Ñ¡·½°¸µÄ6¸öÏà¶ÔĞ§ÓÃÖµ:');
+    disp('æ¯ä¸ªå¤‡é€‰æ–¹æ¡ˆçš„6ä¸ªç›¸å¯¹æ•ˆç”¨å€¼:');
     disp(relative_utility_values);
-    %½«Ã¿¸ö¶ÔÏóµÄÁù¸öĞ§ÓÃÖµ¸³Öµ¸øU
+    %å°†æ¯ä¸ªå¯¹è±¡çš„å…­ä¸ªæ•ˆç”¨å€¼èµ‹å€¼ç»™U
     U = relative_utility_values;
-    % ¼ÆËãÃ¿¸ö¶ÔÏóµÄÆÚÍûĞ§ÓÃ
-    expected_utilities = zeros(num_alternatives, 3); % ³õÊ¼»¯ÆÚÍûĞ§ÓÃ¾ØÕó
+    % è®¡ç®—æ¯ä¸ªå¯¹è±¡çš„æœŸæœ›æ•ˆç”¨
+    expected_utilities = zeros(num_alternatives, 3); % åˆå§‹åŒ–æœŸæœ›æ•ˆç”¨çŸ©é˜µ
 
-    % ½«good_state_probs¸³Öµ¸øprobabilities
+    % å°†good_state_probsèµ‹å€¼ç»™probabilities
     probabilities = Pro; 
 
-    % ±éÀúÃ¿¸ö¶ÔÏó
+    % éå†æ¯ä¸ªå¯¹è±¡
     for i = 1:num_alternatives
-        % ¶ÔÓÚÃ¿¸ö¶ÔÏó£¬¸ù¾İ¶ÔÓ¦µÄ¸ÅÂÊ¼¯¼ÆËãÆÚÍûĞ§ÓÃ
-        % ²ÉÈ¡ h_p ĞĞ¶¯µÄÆÚÍûĞ§ÓÃ
+        % å¯¹äºæ¯ä¸ªå¯¹è±¡ï¼Œæ ¹æ®å¯¹åº”çš„æ¦‚ç‡é›†è®¡ç®—æœŸæœ›æ•ˆç”¨
+        % é‡‡å– h_p è¡ŒåŠ¨çš„æœŸæœ›æ•ˆç”¨
         expected_utilities(i, 1) = probabilities(i) * U(i, 1) + (1 - probabilities(i)) * U(i, 2);
         
-        % ²ÉÈ¡ h_b ĞĞ¶¯µÄÆÚÍûĞ§ÓÃ
+        % é‡‡å– h_b è¡ŒåŠ¨çš„æœŸæœ›æ•ˆç”¨
         expected_utilities(i, 2) = probabilities(i) * U(i, 3) + (1 - probabilities(i)) * U(i, 4);
         
-        % ²ÉÈ¡ h_n ĞĞ¶¯µÄÆÚÍûĞ§ÓÃ
+        % é‡‡å– h_n è¡ŒåŠ¨çš„æœŸæœ›æ•ˆç”¨
         expected_utilities(i, 3) = probabilities(i) * U(i, 5) + (1 - probabilities(i)) * U(i, 6);
     end
 
-    % ÏÔÊ¾Ã¿¸ö¶ÔÏóµÄÆÚÍûĞ§ÓÃ
-    disp('Ã¿¸ö¶ÔÏóµÄÆÚÍûËğÊ§£º');
+    % æ˜¾ç¤ºæ¯ä¸ªå¯¹è±¡çš„æœŸæœ›æ•ˆç”¨
+    disp('æ¯ä¸ªå¯¹è±¡çš„æœŸæœ›æŸå¤±ï¼š');
     disp(expected_utilities);
 
     classification_result = cell(num_alternatives, 1);
 
-    % ½øĞĞ·ÖÀà
+    % è¿›è¡Œåˆ†ç±»
     for i = 1:num_alternatives
         if expected_utilities(i, 1) < expected_utilities(i, 2) && expected_utilities(i, 1) <expected_utilities(i, 3)
             classification_result{i} = 'POS(X)';
@@ -236,13 +234,13 @@ yi=Si;
         end
     end
 
-    % ÏÔÊ¾·ÖÀà½á¹û
-    disp('Ã¿¸ö±¸Ñ¡·½°¸µÄ·ÖÀà½á¹û£º');
+    % æ˜¾ç¤ºåˆ†ç±»ç»“æœ
+    disp('æ¯ä¸ªå¤‡é€‰æ–¹æ¡ˆçš„åˆ†ç±»ç»“æœï¼š');
     for i = 1:num_alternatives
-        fprintf('±¸Ñ¡·½°¸ %d: %s\n', i, classification_result{i});
+        fprintf('å¤‡é€‰æ–¹æ¡ˆ %d: %s\n', i, classification_result{i});
     end
 
-    % ¶ÔÃ¿¸ö·ÖÀàÄÚµÄÌæ´ú·½°¸¸ù¾İÆÚÍûĞ§ÓÃÖµ½øĞĞÅÅĞò
+    % å¯¹æ¯ä¸ªåˆ†ç±»å†…çš„æ›¿ä»£æ–¹æ¡ˆæ ¹æ®æœŸæœ›æ•ˆç”¨å€¼è¿›è¡Œæ’åº
     pos_indices = find(strcmp(classification_result, 'POS(X)'));
     [~, sort_order_pos] = sort(expected_utilities(pos_indices, 1), 'ascend');
     bnd_indices = find(strcmp(classification_result, 'BND(X)'));
@@ -250,39 +248,40 @@ yi=Si;
     neg_indices = find(strcmp(classification_result, 'NEG(X)'));
     [~, sort_order_neg] = sort(expected_utilities(neg_indices, 3), 'ascend');
     
-  % Êä³ö·ÖÀà¼¯ºÏ½á¹û
+  % è¾“å‡ºåˆ†ç±»é›†åˆç»“æœ
     pos_set = pos_indices(sort_order_pos);
     bnd_set = bnd_indices(sort_order_bnd);
     neg_set = neg_indices(sort_order_neg);
     
-    % ¼ÆËã¸÷·ÖÀàµÄ»ùÊı
+    % è®¡ç®—å„åˆ†ç±»çš„åŸºæ•°
     pos_cardinality = length(pos_set);
     bnd_cardinality = length(bnd_set);
     neg_cardinality = length(neg_set);
     
     fprintf('POS(X)={');
     fprintf('%d,', pos_set);
-    fprintf('}, »ùÊı: %d\n', pos_cardinality);
+    fprintf('}, åŸºæ•°: %d\n', pos_cardinality);
     fprintf('BND(X)={');
     fprintf('%d,', bnd_set);
-    fprintf('}, »ùÊı: %d\n', bnd_cardinality);
+    fprintf('}, åŸºæ•°: %d\n', bnd_cardinality);
     fprintf('NEG(X)={');
     fprintf('%d,', neg_set);
-    fprintf('}, »ùÊı: %d\n', neg_cardinality);
+    fprintf('}, åŸºæ•°: %d\n', neg_cardinality);
 
     
    
-    % ºÏ²¢ÅÅĞò½á¹û
+    % åˆå¹¶æ’åºç»“æœ
     sorted_indices = [pos_indices(sort_order_pos); bnd_indices(sort_order_bnd); neg_indices(sort_order_neg)];
-    % ÏÔÊ¾ºÏ²¢ºóµÄÅÅĞò½á¹û
-    disp('ºÏ²¢ºóµÄÅÅĞò½á¹û£º');
+    % æ˜¾ç¤ºåˆå¹¶åçš„æ’åºç»“æœ
+    disp('åˆå¹¶åçš„æ’åºç»“æœï¼š');
     disp(sorted_indices);
-   % ´´½¨Ò»¸öÊı×éÀ´¼ÇÂ¼Ã¿¸ö±¸Ñ¡·½°¸µÄÎ»ÖÃ
+   % åˆ›å»ºä¸€ä¸ªæ•°ç»„æ¥è®°å½•æ¯ä¸ªå¤‡é€‰æ–¹æ¡ˆçš„ä½ç½®
 position_array = zeros(num_alternatives, 1);
 for i = 1:length(sorted_indices)
     position_array(sorted_indices(i)) = i;
 end
 
-% ÏÔÊ¾Ã¿¸ö±¸Ñ¡·½°¸µÄÎ»ÖÃ
-disp('Ã¿¸ö±¸Ñ¡·½°¸µÄÎ»ÖÃ£º');
+% æ˜¾ç¤ºæ¯ä¸ªå¤‡é€‰æ–¹æ¡ˆçš„ä½ç½®
+disp('æ¯ä¸ªå¤‡é€‰æ–¹æ¡ˆçš„ä½ç½®ï¼š');
 disp(position_array);
+
