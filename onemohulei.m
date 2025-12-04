@@ -1,66 +1,22 @@
-% m = size(relation_matrix, 1);
-% fuzzy_classes = cell(m, 1);
-% 
-% for i = 1:m
-%     fuzzy_classes{i} = relation_matrix(i, :);
-% end
-% 
-% C = mean(V_norm, 2); 
-% % ½« 366*1 µÄ¾ØÕó×ª»»ÎªÒ»ĞĞ¾ØÕó
-% C_sum_row = reshape(C', 1, []);
-% disp('×ª»»ÎªÒ»ĞĞºóµÄ¾ØÕóÎª£º');
-% disp(C_sum_row);
-% 
-% % ¼ÙÉè fuzzy_classes ÊÇ 366x366 µÄÊı×é
-% % C_sum_row ÊÇ 1x366 µÄĞĞÏòÁ¿
-% 
-% % denominator£º¶Ô fuzzy_classes Ã¿Ò»ĞĞÇóºÍ£¬µÃµ½ 366x1 ÏòÁ¿
-% denominator = sum(fuzzy_classes, 2);  % ÑØĞĞÇóºÍ
-% 
-% % numerator£ºÏÈ½« C_sum_row ×ªÖÃÎªÁĞÏòÁ¿·½±ã¾ØÕó³Ë·¨£¬»òÕßÓÃµã³ËÊµÏÖÖğÔªËØ³ËºóÇóºÍ
-% % ÕâÀïÓÃ¾ØÕó³Ë·¨£º(fuzzy_classes .* (repmat(C_sum_row, 366, 1))) ÖğÔªËØ³Ë·¨
-% % ÔÙ°´ĞĞÇóºÍµÃµ½ 366x1 ÏòÁ¿
-% 
-% numerator = sum(fuzzy_classes .* repmat(C_sum_row, size(fuzzy_classes, 1), 1), 2);
-% 
-% % ¼ÆËã¸ÅÂÊ Pro£¬ÖğÔªËØ³ı
-% Pro = zeros(size(denominator));
-% nonzero_idx = denominator > 0;
-% Pro(nonzero_idx) = numerator(nonzero_idx) ./ denominator(nonzero_idx);
-% Pro = zeros(m, 1);  % ½á¹ûÏòÁ¿£¬³¤¶ÈÎªÄ£ºıÀàÊıÁ¿m
-% 
-% for i = 1:m
-%     numerator = sum(C_sum_row .* fuzzy_classes{i});    % °´ÔªËØ³Ë»ıÔÙÇóºÍ£¬·Ö×Ó
-%     denominator = sum(fuzzy_classes{i});           % ·ÖÄ¸ÊÇÄ£ºıÀàÏòÁ¿ÇóºÍ
-% 
-%     if denominator > 0
-%         Pro(i) = numerator / denominator;          % ±ÈÖµ×÷Îª¸ÅÂÊ
-%     else
-%         Pro(i) = 0;                                % ±ÜÃâ³ıÁã
-%     end
-% end
-% 
-% disp('¼ÆËãµÃµ½µÄProÏòÁ¿Îª£º');
-% disp(Pro);
-% 
 
-% Ö±½ÓÓÃ relation_matrix ¾Í´ú±í fuzzy_classes£¬¹ØÏµ¾ØÕóÊÇ m¡Án µÄÆÕÍ¨Êı×é
-fuzzy_classes = relation_matrix;   % 366 x 366 Êı×é£¬²»ÓÃ cell
+% ç›´æ¥ç”¨ relation_matrix å°±ä»£è¡¨ fuzzy_classesï¼Œå…³ç³»çŸ©é˜µæ˜¯ mÃ—n çš„æ™®é€šæ•°ç»„
+fuzzy_classes = relation_matrix;   % 366 x 366 æ•°ç»„ï¼Œä¸ç”¨ cell
 
 Ci = mean(V_norm, 2); 
-Ci_sum_row = reshape(Ci', 1, []);   % 1 x 366 ĞĞÏòÁ¿
+Ci_sum_row = reshape(Ci', 1, []);   % 1 x 366 è¡Œå‘é‡
 
-% denominator: Ã¿ĞĞÇóºÍ
+% denominator: æ¯è¡Œæ±‚å’Œ
 denominator = sum(fuzzy_classes, 2);    
 
-% numerator: Ã¿ĞĞÓë C_sum_row °´ÔªËØ³Ë»ıºóÇóºÍ
+% numerator: æ¯è¡Œä¸ C_sum_row æŒ‰å…ƒç´ ä¹˜ç§¯åæ±‚å’Œ
 numerator = sum(fuzzy_classes .* repmat(Ci_sum_row, size(fuzzy_classes, 1), 1), 2);
 
-% ¼ÆËã¸ÅÂÊ Pro
+% è®¡ç®—æ¦‚ç‡ Pro
 Pro = zeros(size(denominator));
 nonzero_idx = denominator > 0;
 Pro(nonzero_idx) = numerator(nonzero_idx) ./ denominator(nonzero_idx);
 
-disp('¼ÆËãµÃµ½µÄProÏòÁ¿Îª£º');
+disp('è®¡ç®—å¾—åˆ°çš„Proå‘é‡ä¸ºï¼š');
 disp(Pro);
+
 
