@@ -1,6 +1,5 @@
- % 将六个矩阵的每一行合并到 M 中  
-for i = 1:366  
-    % 将每个矩阵的第 i 行赋值给 M  
+ 
+for i = 1:366 
     M{i, 1} = A(i, :);  
     M{i, 2} = B(i, :);  
     M{i, 3} = C(i, :);  
@@ -8,7 +7,6 @@ for i = 1:366
     M{i, 5} = E(i, :);  
     M{i, 6} = F(i, :);  
 end
-% 获取M的行数和列数  
 numRows = size(M, 1);  
 numCols = size(M, 2);  
 
@@ -79,7 +77,7 @@ distance_to_fu = zeros(numRows, numCols);
 % 计算每个元素到正理想点和负理想点的距离
 for att_idx = 1:numCols
     for i = 1:numRows
-        % 获取当前元素
+
         x = cell2mat(MT{i, att_idx}); 
         
         % 获取正理想点
@@ -164,7 +162,6 @@ Si =0.5.*(I_fu+I_zheng);
 
 yi=Si;
 
- % 找出chi里面的最大和最小值
     yi_max = max(Si);
     yi_min = min(Si);
 
@@ -174,9 +171,7 @@ yi=Si;
   s=0.3%SCC
 
 
-    num_alternatives = length(yi); % 假设备选方案数量等于chi的长度
-
-    % 初始化相对效用值矩阵，num_alternatives行6列，分别对应6个相对效用函数
+    num_alternatives = length(yi);
     relative_utility_values = zeros(num_alternatives, 6);
 
     for i = 1:num_alternatives
@@ -280,8 +275,7 @@ position_array = zeros(num_alternatives, 1);
 for i = 1:length(sorted_indices)
     position_array(sorted_indices(i)) = i;
 end
-
-% 显示每个备选方案的位置
 disp('每个备选方案的位置：');
 disp(position_array);
+
 
