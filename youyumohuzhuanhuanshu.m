@@ -1,4 +1,4 @@
-% 定义
+% 瀹氫箟
 V=[79	85	124	197	78
 72	71	114	269	75
 41	51	72	140	87
@@ -365,33 +365,24 @@ V=[79	85	124	197	78
 78	80	74	127	82
 89	89	110	285	88
 75	81	145	84	102
-
-
-
-
-
 ];
 
-
-% 初始化一个与 V 大小相同的矩阵，用于存储归一化后的数据  
 V_norm = zeros(size(V));  
-
-% 遍历每一行数据  
+ 
 for i = 1:size(V, 1)  
-    % 提取当前行的数据  
+    
     V_row = V(i, :);  
-    % 确定 V_row 的最小值和最大值  
+
     minV_row = min(V_row);  
     maxV_row = max(V_row);  
 
-    % 检查是否所有元素相等  
     if maxV_row == minV_row  
-        % 如果相等，则可以选择保持原值或设置为特定值  
-         V_norm(i, :) = 0.5; % 或者使用 V_row 的平均值:   
+      
+         V_norm(i, :) = 0.5; 
     else  
-        % 规范化当前行的数据  
         V_norm_row = (V_row - minV_row) / (maxV_row - minV_row);  
-        % 将归一化后的数据存储到 V_norm 矩阵中  
+       
         V_norm(i, :) = V_norm_row;  
     end  
 end  
+
